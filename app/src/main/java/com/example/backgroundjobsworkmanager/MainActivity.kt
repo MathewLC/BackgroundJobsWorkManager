@@ -29,9 +29,14 @@ class MainActivity : AppCompatActivity() {
 //            val data = Data.Builder()
 //                .putString("WORK_MESSAGE","Work Completed!")
 //                .build()
+            val constraints = Constraints.Builder()
+                .setRequiresCharging(true)
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
             val data = workDataOf("WORK_MESSAGE" to "Work Completed!")
             val workRequest = OneTimeWorkRequestBuilder<SimpleWorker>()
                 .setInputData(data)
+                .setConstraints(constraints)
                 .build()
             val periodicWorkRequest = PeriodicWorkRequestBuilder<SimpleWorker>(
                 5, TimeUnit.MINUTES,
